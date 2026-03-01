@@ -6,7 +6,7 @@
   const css = `
     #sc-chat-wrapper * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif; }
     #sc-chat-btn {
-      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      position: fixed; bottom: 100px; right: 24px; z-index: 9999;
       width: 60px; height: 60px; border-radius: 50%;
       background: ${PRIMARY}; color: #fff; border: none; cursor: pointer;
       box-shadow: 0 4px 16px rgba(0,119,182,0.4);
@@ -16,7 +16,7 @@
     #sc-chat-btn:hover { background: ${PRIMARY_DARK}; transform: scale(1.05); }
     #sc-chat-btn svg { width: 28px; height: 28px; }
     #sc-chat-window {
-      position: fixed; bottom: 96px; right: 24px; z-index: 9998;
+      position: fixed; bottom: 172px; right: 24px; z-index: 9998;
       width: 360px; height: 520px; border-radius: 16px;
       background: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18);
       display: flex; flex-direction: column; overflow: hidden;
