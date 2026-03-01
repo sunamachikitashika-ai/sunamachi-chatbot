@@ -7,14 +7,17 @@
     #sc-chat-wrapper * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif; }
     #sc-chat-btn {
       position: fixed; bottom: 100px; right: 24px; z-index: 9999;
-      width: 60px; height: 60px; border-radius: 50%;
+      height: 52px; padding: 0 18px; border-radius: 26px;
       background: ${PRIMARY}; color: #fff; border: none; cursor: pointer;
       box-shadow: 0 4px 16px rgba(0,119,182,0.4);
-      display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
       transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
     }
-    #sc-chat-btn:hover { background: ${PRIMARY_DARK}; transform: scale(1.05); }
-    #sc-chat-btn svg { width: 28px; height: 28px; }
+    #sc-chat-btn:hover { background: ${PRIMARY_DARK}; transform: scale(1.03); }
+    #sc-chat-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+    #sc-chat-btn .sc-btn-text { font-size: 13px; font-weight: bold; line-height: 1.3; text-align: left; }
+    #sc-chat-btn .sc-btn-text span { display: block; font-size: 10px; font-weight: normal; opacity: 0.9; }
     #sc-chat-window {
       position: fixed; bottom: 172px; right: 24px; z-index: 9998;
       width: 360px; height: 520px; border-radius: 16px;
@@ -81,8 +84,8 @@
     #sc-send-btn:disabled { background: #ccc; cursor: not-allowed; }
     #sc-send-btn svg { width: 18px; height: 18px; }
     @media (max-width: 480px) {
-      #sc-chat-window { width: calc(100vw - 32px); right: 16px; bottom: 88px; }
-      #sc-chat-btn { right: 16px; bottom: 16px; }
+      #sc-chat-window { width: calc(100vw - 32px); right: 16px; bottom: 160px; }
+      #sc-chat-btn { right: 16px; bottom: 100px; }
     }
   `;
 
@@ -93,10 +96,14 @@
   const wrapper = document.createElement('div');
   wrapper.id = 'sc-chat-wrapper';
   wrapper.innerHTML = `
-    <button id="sc-chat-btn" aria-label="チャットを開く">
+    <button id="sc-chat-btn" aria-label="AIチャットを開く">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
+      <div class="sc-btn-text">
+        AIチャット
+        <span>ご質問・お問い合わせ</span>
+      </div>
     </button>
     <div id="sc-chat-window" class="sc-hidden">
       <div id="sc-chat-header">
