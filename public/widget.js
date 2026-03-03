@@ -147,10 +147,15 @@
     if (isOpen) input.focus();
   }
 
+  function linkify(text) {
+    const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return escaped.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#0077B6;text-decoration:underline;word-break:break-all;">$1</a>');
+  }
+
   function addMessage(role, text) {
     const div = document.createElement('div');
     div.className = `sc-msg sc-${role}`;
-    div.innerHTML = `<div class="sc-bubble">${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>`;
+    div.innerHTML = `<div class="sc-bubble">${linkify(text)}</div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
     return div;
