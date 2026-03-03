@@ -199,14 +199,19 @@ export default async function handler(req, res) {
   const aiText = data.content[0].text;
 
   // Google Sheetsにログを記録（非同期・待たない）
-  if (process.env.GOOGLE_SCRIPT_URL) {
-    const lastUserMessage = [...messages].reverse().find(m => m.role === 'user')?.content || '';
-    const timestamp = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-    fetch(process.env.GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ timestamp, question: lastUserMessage, answer: aiText })
-    }).catch(() => {});
+  try {
+    const scriptUrl = process.env.GOOGLE_SCRIPT_URL;
+    if (scriptUrl && scriptUrl.startsWith('https://')) {
+      const lastUserMessage = [...messages].reverse().find(m => m.role === 'user')?.content || '';
+      const timestamp = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+      fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ timestamp, question: lastUserMessage, answer: aiText })
+      }).catch(() => {});
+    }
+  } catch (e) {
+    // ログ失敗してもチャットは継続
   }
 
   return res.status(200).json({ content: aiText });
